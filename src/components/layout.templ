@@ -2,35 +2,35 @@ package components
 
 templ layout() {
     @page() {
-        <div class="bg-gray-100 text-gray-800 min-h-screen font-sans">
+        <div class="bg-gradient-to-br from-gray-900 to-gray-800 text-white min-h-screen font-sans">
             <div class="max-w-screen-lg mx-auto p-8">
                 @navbar()
-                <hr class="my-4 border-t-2 border-gray-300 w-full" />
+                <hr class="my-4 border-t-2 border-gray-700 w-full" />
                 <div class="grid gap-6 grid-cols-1 md:grid-cols-2">
                     <div class="space-y-6">
-                        <div class="bg-white p-6 rounded-lg shadow-md">
-                            <h2 class="text-xl font-semibold mb-2 text-indigo-600">
+                        <div class="bg-gradient-to-r from-indigo-700 to-teal-700 p-6 rounded-lg shadow-md transform hover:scale-105 transition duration-300">
+                            <h2 class="text-xl font-semibold mb-2">
                                 Embracing Creativity
                             </h2>
-                            <p class="text-gray-700">
+                            <p class="text-gray-300">
                                 Explore the beauty of creativity and inspiration through my personal blog. Dive into captivating stories, imaginative thoughts, and meaningful experiences.
                             </p>
                         </div>
-                        <div class="bg-white p-6 rounded-lg shadow-md">
-                            <h2 class="text-xl font-semibold mb-2 text-indigo-600">
+                        <div class="bg-gradient-to-r from-blue-700 to-cyan-700 p-6 rounded-lg shadow-md transform hover:scale-105 transition duration-300">
+                            <h2 class="text-xl font-semibold mb-2">
                                 Transformative Ideas
                             </h2>
-                            <p class="text-gray-700">
+                            <p class="text-gray-300">
                                 Discover transformative ideas that inspire change and innovation. Join me on a journey to explore the limitless possibilities of the creative mind.
                             </p>
                         </div>
                         <!-- Add more blog posts as needed -->
                     </div>
-                    <div class="bg-white p-6 rounded-lg">
-                        <h2 class="text-2xl font-semibold mb-4 text-indigo-600">
+                    <div class="bg-gradient-to-r from-cyan-700 to-green-700 p-6 rounded-lg shadow-md transform hover:scale-105 transition duration-300">
+                        <h2 class="text-2xl font-semibold mb-4">
                             About Me
                         </h2>
-                        <p class="text-gray-700">
+                        <p class="text-gray-300">
                             Welcome to my world of creativity and inspiration! I'm Casper Aangeenbrug, a passionate individual dedicated to exploring the depths of creative expression. Let's embark on this exciting journey together.
                         </p>
                     </div>
@@ -42,13 +42,13 @@ templ layout() {
 
 templ navbar() {
     <div class="flex justify-between items-center py-4 px-8">
-        <div class="text-2xl font-semibold text-indigo-600">
+        <div class="text-2xl font-semibold text-green-500">
             Casper Aangeenbrug
         </div>
         <div class="space-x-6">
-            <a href="#" class="text-gray-600 hover:text-indigo-600 transition duration-300">Home</a>
-            <a href="#" class="text-gray-600 hover:text-indigo-600 transition duration-300">About</a>
-            <a href="#" class="text-gray-600 hover:text-indigo-600 transition duration-300">Contact</a>
+            <a href="#" class="text-gray-300 hover:text-green-500 transition duration-300">Home</a>
+            <a href="#" class="text-gray-300 hover:text-green-500 transition duration-300">About</a>
+            <a href="#" class="text-gray-300 hover:text-green-500 transition duration-300">Contact</a>
         </div>
     </div>
 }
