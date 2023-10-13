@@ -21,6 +21,6 @@ func NewHomeHandler() *HomeHandler {
 
 func (h *HomeHandler) Handle(c *gin.Engine) {
 	c.GET("/", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "hello.html", components.HomePage())
+		c.HTML(http.StatusOK, "home.html", components.HomePage())
 	})
 }

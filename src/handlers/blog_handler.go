@@ -22,7 +22,7 @@ func NewBlogHandler() *BlogHandler {
 func (h *BlogHandler) Handle(c *gin.Engine) {
 	for _, blogPost := range h.BlogService.BlogPosts {
 		c.GET("/blog/"+blogPost.FileName, func(c *gin.Context) {
-			c.HTML(http.StatusOK, "hello.html", components.BlogPostPage())
+			c.HTML(http.StatusOK, "blog_post.html", components.BlogPostPage())
 		})
 	}
 }
