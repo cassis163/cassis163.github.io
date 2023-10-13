@@ -1,10 +1,10 @@
 ### Project
 
 # Exclude generated files from templates
-src/components/*.go
+components/*.go
 
 # Air (live reload)
-src/tmp/**
+tmp/**
 
 
 ### Generated
