@@ -1,8 +1,31 @@
 package components
 
-templ BlogPostPage() {
+templ BlogPostPage(title string, body templ.Component) {
 	@layout() {
-		<p>yay</p>
+        <div class="p-10 bg-gray-800 rounded-xl">
+            <h1 class="text-5xl">{ title }</h1>
+            @contentComponent(title, body)
+        </div>
 	}
 }
 
+templ contentComponent(title string, body templ.Component) {
+    <style type="text/css">
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+    <html class="blog-content">
+            {! body }
+    </html>
+}
