@@ -9,7 +9,9 @@ import (
 func main() {
 	r := gin.Default()
 	r.HTMLRender = &TemplRender{}
-	handler := handlers.NewHomeHandler()
-	handler.Handle(r)
+	HomeHandler := handlers.NewHomeHandler()
+	blogHandler := handlers.NewBlogHandler()
+	HomeHandler.Handle(r)
+	blogHandler.Handle(r)
 	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
