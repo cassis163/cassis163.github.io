@@ -4,6 +4,8 @@ go 1.21.2
 
 require github.com/a-h/templ v0.2.364
 
+require github.com/gomarkdown/markdown v0.0.0-20230922112808-5421fefb8386 // indirect
+
 require (
 	github.com/bytedance/sonic v1.10.2 // indirect
 	github.com/chenzhuoyu/base64x v0.0.0-20230717121745-296ad89f973d // indirect
