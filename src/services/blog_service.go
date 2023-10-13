@@ -1,6 +1,7 @@
 package services
 
 import (
+	"errors"
 	"os"
 	"path/filepath"
 	"strings"
@@ -36,6 +37,16 @@ func (b *BlogService) GenerateMdFromBlogPost(blogPost persistence.BlogPost) []by
 	renderer := html.NewRenderer(opts)
 
 	return markdown.Render(doc, renderer)
+}
+
+func (b *BlogService) GetBlogPostByName(name string) (persistence.BlogPost, error) {
+	for _, blogPost := range b.BlogPosts {
+		if blogPost.FileName == name {
+			return blogPost, nil
+		}
+	}
+
+	return persistence.BlogPost{}, errors.New("blog post not found.")
 }
 
 func getBlogPosts() []persistence.BlogPost {

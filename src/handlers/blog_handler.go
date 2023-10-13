@@ -23,13 +23,33 @@ func NewBlogHandler() *BlogHandler {
 }
 
 func (h *BlogHandler) Handle(c *gin.Engine) {
+	blogPostsHtmlByName, err := h.getBlogPostsHtmlByName()
+	if err != nil {
+		panic(err)
+	}
+
+	c.GET("/blog/:name", func(c *gin.Context) {
+		name := c.Param("name")
+		blogPost, err := h.BlogService.GetBlogPostByName(name)
+		html := blogPostsHtmlByName[name]
+		component := Unsafe(string(html))
+
+		if err != nil {
+			panic(err)
+		}
+
+		c.HTML(http.StatusOK, "blog_post.html", components.BlogPostPage(blogPost.Title, component))
+	})
+}
+
+func (h *BlogHandler) getBlogPostsHtmlByName() (map[string]string, error) {
+	var blogPostsHtmlByName = make(map[string]string)
 	for _, blogPost := range h.BlogService.BlogPosts {
 		html := h.BlogService.GenerateMdFromBlogPost(blogPost)
-		component := Unsafe(string(html))
-		c.GET("/blog/"+blogPost.FileName, func(c *gin.Context) {
-			c.HTML(http.StatusOK, "blog_post.html", components.BlogPostPage(blogPost.Title, component))
-		})
+		blogPostsHtmlByName[blogPost.FileName] = string(html)
 	}
+
+	return blogPostsHtmlByName, nil
 }
 
 func Unsafe(html string) templ.Component {
