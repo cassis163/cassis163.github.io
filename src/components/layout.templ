@@ -1,26 +1,27 @@
 package components
 
 templ layout() {
-    @page() {
-        <div class="bg-gradient-to-br from-gray-900 to-gray-800 text-white min-h-screen font-sans">
-            <div class="max-w-screen-lg mx-auto p-8">
-                @navbar()
-                <div class="my-8 w-full h-1 bg-gradient-to-r from-green-500 to-cyan-500 rounded-full opacity-80" />
-                { children... }
-            </div>
-        </div>
-    }
+	@page() {
+		<div class="bg-gradient-to-br from-gray-900 to-gray-800 text-white min-h-screen font-sans">
+			<div class="max-w-screen-lg mx-auto p-8">
+				@navbar()
+				<div class="my-8 w-full h-1 bg-gradient-to-r from-green-500 to-cyan-500 rounded-full opacity-80"></div>
+				{ children... }
+			</div>
+		</div>
+	}
 }
 
 templ navbar() {
-    <div class="flex justify-between items-center py-4 px-8">
-        <div class="text-2xl font-semibold bg-gradient-to-r from-green-500 to-green-400 text-transparent bg-clip-text">
-            Casper Aangeenbrug
-        </div>
-        <div class="space-x-6">
-            <a href="#" class="text-gray-300 hover:text-green-500 transition duration-300">Home</a>
-            <a href="#" class="text-gray-300 hover:text-green-500 transition duration-300">About</a>
-            <a href="#" class="text-gray-300 hover:text-green-500 transition duration-300">Contact</a>
-        </div>
-    </div>
+	<div class="flex justify-between items-center py-4 px-8">
+		<div class="text-2xl font-semibold bg-gradient-to-r from-green-500 to-green-400 text-transparent bg-clip-text">
+			<a href="/">Casper Aangeenbrug</a>
+		</div>
+		<div class="space-x-6">
+			<a href="/" class="text-gray-300 hover:text-green-500 transition duration-300">Home</a>
+			<!--<a href="#" class="text-gray-300 hover:text-green-500 transition duration-300">About</a>
+			<a href="#" class="text-gray-300 hover:text-green-500 transition duration-300">Contact</a>-->
+		</div>
+	</div>
 }
+

@@ -32,13 +32,15 @@ func (h *BlogHandler) Handle(c *gin.Engine) {
 		name := c.Param("name")
 		blogPost, err := h.BlogService.GetBlogPostByName(name)
 		html := blogPostsHtmlByName[name]
-		component := Unsafe(string(html))
+		component := unsafe(string(html))
 
 		if err != nil {
 			panic(err)
 		}
 
-		c.HTML(http.StatusOK, "blog_post.html", components.BlogPostPage(blogPost.Title, component))
+		formattedCreationDate := blogPost.CreatedAt.Format("January 2, 2006")
+		readTimeInMinutes := h.BlogService.GetReadTimeInMinutes(blogPost)
+		c.HTML(http.StatusOK, "blog_post.html", components.BlogPostPage(blogPost.Title, formattedCreationDate, readTimeInMinutes, component))
 	})
 }
 
@@ -52,7 +54,7 @@ func (h *BlogHandler) getBlogPostsHtmlByName() (map[string]string, error) {
 	return blogPostsHtmlByName, nil
 }
 
-func Unsafe(html string) templ.Component {
+func unsafe(html string) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, w io.Writer) (err error) {
 		_, err = io.WriteString(w, html)
 		return

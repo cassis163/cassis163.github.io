@@ -2,6 +2,7 @@ package services
 
 import (
 	"errors"
+	"fmt"
 	"os"
 	"path/filepath"
 	"strings"
@@ -16,6 +17,9 @@ import (
 )
 
 const MARKDOWN_EXTENSION = ".md"
+
+// In words per minute
+const AVERAGE_READING_SPEED = 200
 
 func NewBlogService() *BlogService {
 	return &BlogService{
@@ -47,6 +51,13 @@ func (b *BlogService) GetBlogPostByName(name string) (persistence.BlogPost, erro
 	}
 
 	return persistence.BlogPost{}, errors.New("blog post not found")
+}
+
+func (b *BlogService) GetReadTimeInMinutes(blogPost persistence.BlogPost) string {
+	words := len(strings.Fields(string(blogPost.Content)))
+	// read time in minutes
+	readTime := words / AVERAGE_READING_SPEED
+	return fmt.Sprintf("%dm", readTime)
 }
 
 func getBlogPosts() []persistence.BlogPost {

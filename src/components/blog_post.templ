@@ -1,15 +1,21 @@
 package components
 
-templ BlogPostPage(title string, body templ.Component) {
+templ BlogPostPage(title string, creationDate string, readTime string, body templ.Component) {
 	@layout() {
 		<div class="p-10 bg-gray-800 rounded-md">
-			<h1 class="text-5xl">{ title }</h1>
-			@contentComponent(title, body)
+			<div class="flex flex-row justify-between">
+				<h1 class="text-5xl">{ title }</h1>
+				<div class="text-right">
+					<span class="text-gray-400">from { creationDate }</span>
+					@readTimeIndicator(readTime)
+				</div>
+			</div>
+			@contentComponent(body)
 		</div>
 	}
 }
 
-templ contentComponent(title string, body templ.Component) {
+templ contentComponent(body templ.Component) {
 	<style type="text/css">
         h3 {
             font-size: 1.5rem;
@@ -32,5 +38,12 @@ templ contentComponent(title string, body templ.Component) {
 	<html class="blog-content">
 		{! body }
 	</html>
+}
+
+templ readTimeIndicator(readTime string) {
+	if readTime != "0m" {
+		<br/>
+		<span class="text-gray-400">{ readTime } read</span>
+	}
 }
 
