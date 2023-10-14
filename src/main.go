@@ -14,5 +14,6 @@ func main() {
 	blogHandler := handlers.NewBlogHandler()
 	HomeHandler.Handle(r)
 	blogHandler.Handle(r)
-	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+	// Run on port 8080
+	r.Run()
 }
