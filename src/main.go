@@ -8,7 +8,7 @@ import (
 
 func main() {
 	r := gin.Default()
-	r.StaticFS("/static", gin.Dir("../assets/images", false))
+	r.StaticFS("/static", gin.Dir("assets/images", false))
 	r.HTMLRender = &TemplRender{}
 	HomeHandler := handlers.NewHomeHandler()
 	blogHandler := handlers.NewBlogHandler()
