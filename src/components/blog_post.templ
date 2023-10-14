@@ -2,15 +2,15 @@ package components
 
 templ BlogPostPage(title string, body templ.Component) {
 	@layout() {
-        <div class="p-10 bg-gray-800 rounded-xl">
-            <h1 class="text-5xl">{ title }</h1>
-            @contentComponent(title, body)
-        </div>
+		<div class="p-10 bg-gray-800 rounded-md">
+			<h1 class="text-5xl">{ title }</h1>
+			@contentComponent(title, body)
+		</div>
 	}
 }
 
 templ contentComponent(title string, body templ.Component) {
-    <style type="text/css">
+	<style type="text/css">
         h3 {
             font-size: 1.5rem;
             font-weight: 600;
@@ -24,8 +24,13 @@ templ contentComponent(title string, body templ.Component) {
             margin-top: 2rem;
             margin-bottom: 1rem;
         }
+
+        img {
+            border-radius: 0.3rem;
+        }
     </style>
-    <html class="blog-content">
-            {! body }
-    </html>
+	<html class="blog-content">
+		{! body }
+	</html>
 }
+
