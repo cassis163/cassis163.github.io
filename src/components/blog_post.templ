@@ -5,7 +5,7 @@ templ BlogPostPage(title string, creationDate string, readTime string, body temp
 		<div class="flex flex-col gap-10 justify-between">
 			<div class="p-10 bg-gray-800 rounded-md">
 				<div class="flex flex-row justify-between">
-					<header class="text-5xl">{ title }</header>
+					<header class="text-5xl mb-20">{ title }</header>
 					<div class="text-right">
 						<span class="text-gray-400">from { creationDate }</span>
 						@readTimeIndicator(readTime)
