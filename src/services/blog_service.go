@@ -46,7 +46,7 @@ func (b *BlogService) GetBlogPostByName(name string) (persistence.BlogPost, erro
 		}
 	}
 
-	return persistence.BlogPost{}, errors.New("blog post not found.")
+	return persistence.BlogPost{}, errors.New("blog post not found")
 }
 
 func getBlogPosts() []persistence.BlogPost {
