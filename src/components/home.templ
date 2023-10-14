@@ -1,36 +1,53 @@
 package components
 
-templ HomePage() {
+import dtos "github.com/cassis163/personal-site/dtos"
+
+templ HomePage(blogPostItems []dtos.BlogPostPreviewItem) {
 	@layout() {
 		<div class="grid gap-6 grid-cols-1 md:grid-cols-2">
 			<div class="space-y-6">
-				<div class="bg-gradient-to-r from-indigo-700 to-teal-700 p-6 rounded-lg shadow-md transform hover:scale-105 transition duration-300">
-					<h2 class="text-xl font-semibold mb-2">
-						Embracing Creativity
-					</h2>
-					<p class="text-gray-300">
-						Explore the beauty of creativity and inspiration through my personal blog. Dive into captivating stories, imaginative thoughts, and meaningful experiences.
-					</p>
-				</div>
-				<div class="bg-gradient-to-r from-blue-700 to-cyan-700 p-6 rounded-lg shadow-md transform hover:scale-105 transition duration-300">
-					<h2 class="text-xl font-semibold mb-2">
-						Transformative Ideas
-					</h2>
-					<p class="text-gray-300">
-						Discover transformative ideas that inspire change and innovation. Join me on a journey to explore the limitless possibilities of the creative mind.
-					</p>
-				</div>
-				<!-- Add more blog posts as needed -->
+				for _, item := range blogPostItems {
+					@blogPostPreview(item)
+				}
 			</div>
-			<div class="bg-gray-800 p-6 rounded-lg shadow-md transform hover:scale-105 transition duration-300 h-fit">
-				<h2 class="text-2xl font-semibold mb-4">
-					About Me
-				</h2>
-				<p class="text-gray-300">
-					Welcome to my world of creativity and inspiration! I'm Casper Aangeenbrug, a passionate individual dedicated to exploring the depths of creative expression. Let's embark on this exciting journey together.
-				</p>
-			</div>
+			@personalNote()
 		</div>
 	}
+}
+
+templ blogPostPreview(blogPostItem dtos.BlogPostPreviewItem) {
+    <a href={ blogPostItem.Link }>
+        <div class="bg-gradient-to-r from-indigo-700 to-teal-700 p-6 rounded-lg shadow-md transform hover:scale-105 transition duration-300">
+            <h2 class="text-xl font-semibold mb-2">
+                { blogPostItem.Title }
+            </h2>
+            @blogPostPreviewInfo(blogPostItem)
+        </div>
+    </a>
+}
+
+templ blogPostPreviewInfo(blogPostItem dtos.BlogPostPreviewItem) {
+    if (blogPostItem.ReadTime == "0m") {
+        <p class="text-gray-300">
+            { blogPostItem.CreationDate }
+        </p>
+    } else {
+        <p class="text-gray-300">
+            { blogPostItem.ReadTime }
+            •
+            { blogPostItem.CreationDate }
+        </p>
+    }
+}
+
+templ personalNote() {
+	<div class="bg-gray-800 p-6 rounded-lg shadow-md transform hover:scale-105 transition duration-300 h-fit">
+		<h2 class="text-2xl font-semibold mb-4">
+			About Me
+		</h2>
+		<p class="text-gray-300">
+			Welcome to my world of creativity and inspiration! I'm Casper Aangeenbrug, a passionate individual dedicated to exploring the depths of creative expression. Let's embark on this exciting journey together.
+		</p>
+	</div>
 }
 
