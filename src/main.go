@@ -1,6 +1,8 @@
 package main
 
 import (
+	"os"
+
 	"github.com/gin-gonic/gin"
 
 	handlers "github.com/cassis163/personal-site/handlers"
@@ -14,6 +16,14 @@ func main() {
 	blogHandler := handlers.NewBlogHandler()
 	HomeHandler.Handle(r)
 	blogHandler.Handle(r)
-	// Run on port 8080
-	r.Run()
+	r.Run(":" + getPort())
+}
+
+func getPort() string {
+	port := os.Getenv("PORT")
+	if port == "" {
+		return "8080"
+	}
+
+	return port
 }
