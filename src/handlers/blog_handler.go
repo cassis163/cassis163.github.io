@@ -1,15 +1,13 @@
 package handlers
 
 import (
-	"context"
-	"io"
 	"net/http"
 
-	"github.com/a-h/templ"
 	"github.com/gin-gonic/gin"
 
 	components "github.com/cassis163/personal-site/components"
-	"github.com/cassis163/personal-site/services"
+	services "github.com/cassis163/personal-site/services"
+	util "github.com/cassis163/personal-site/util"
 )
 
 type BlogHandler struct {
@@ -32,7 +30,7 @@ func (h *BlogHandler) Handle(c *gin.Engine) {
 		name := c.Param("name")
 		blogPost, err := h.BlogService.GetBlogPostByName(name)
 		html := blogPostsHtmlByName[name]
-		component := unsafe(string(html))
+		component := util.Unsafe(string(html))
 
 		if err != nil {
 			panic(err)
@@ -52,11 +50,4 @@ func (h *BlogHandler) getBlogPostsHtmlByName() (map[string]string, error) {
 	}
 
 	return blogPostsHtmlByName, nil
-}
-
-func unsafe(html string) templ.Component {
-	return templ.ComponentFunc(func(ctx context.Context, w io.Writer) (err error) {
-		_, err = io.WriteString(w, html)
-		return
-	})
 }
