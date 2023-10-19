@@ -5,7 +5,7 @@ COPY go.mod go.sum ./
 RUN go mod download
 COPY . /app
 RUN go install github.com/a-h/templ/cmd/templ@latest
-RUN $GO_PATH/bin/templ generate .
+RUN $GOPATH/bin/templ generate .
 RUN CGO_ENABLED=0 GOOS=linux go build -o /entrypoint
 
 # Deploy.
