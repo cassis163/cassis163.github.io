@@ -31,3 +31,109 @@ This approach scales.
 It is very easy to add more parameters to your biomes, not to mention that you can work out distances between points in higher dimensions rather easily.
 
 No need for biome tables. Keep it simple.
+
+Here is a code snippet in Lua to prove my point:
+```lua
+local Biome = {}
+Biome.__index = Biome
+
+function Biome.new(name, aspects)
+    local self = setmetatable({}, Biome)
+    self.name = name
+    self.aspects = aspects
+    return self
+end
+
+function Biome:getName()
+    return self.name
+end
+
+function Biome:getAspects()
+    return self.aspects
+end
+
+------------------------------
+
+local BiomeAspect = {}
+BiomeAspect.__index = BiomeAspect
+
+function BiomeAspect.new(name, weight)
+    local self = setmetatable({}, BiomeAspect)
+    self.name = name
+    self.weight = weight
+    return self
+end
+
+function BiomeAspect:getName()
+    return self.name
+end
+
+function BiomeAspect:getWeight()
+    return self.weight
+end
+
+-----------------------------------------------------
+
+function getClosestBiomeToAspects(aspects, biomes)
+    local closestScore = math.huge
+    local closestBiome = nil
+
+    local point = getAspectsPoint(aspects)
+    for _, biome in ipairs(biomes) do
+        local biomePoint = getAspectsPoint(biome:getAspects())
+        if #point ~= #biomePoint then
+            error("Aspects points must have the same length")
+        end
+
+        local distance = getDistance(point, biomePoint)
+        if distance < closestScore then
+            closestScore = distance
+            closestBiome = biome
+        end
+    end
+
+    return closestBiome
+end
+
+function getDistance(pointA, pointB)
+    local sumOfSquares = 0
+    for i = 1, #pointA do
+        local delta = pointA[i] - pointB[i]
+        sumOfSquares = sumOfSquares + delta * delta
+    end
+
+    return math.sqrt(sumOfSquares)
+end
+
+function getAspectsPoint(aspects)
+    local point = {}
+    for _, aspect in ipairs(aspects) do
+        table.insert(point, aspect:getWeight())
+    end
+
+    return point
+end
+
+function createAspects(temperature, humidity, elevation, fertility)
+    return {
+        BiomeAspect.new("temperature", temperature),
+        BiomeAspect.new("humidity", humidity),
+        BiomeAspect.new("elevation", elevation),
+        BiomeAspect.new("fertility", fertility)
+    }
+end
+
+--------------------------------------------------
+
+local desertBiome = Biome.new("desert", createAspects(40, 5, 1, 1))
+local forestBiome = Biome.new("forest", createAspects(20, 1, 2, 10))
+local mountainBiome = Biome.new("mountain", createAspects(-5, 4, 10, 3))
+local biomes = {desertBiome, forestBiome, mountainBiome}
+
+local pointInTheWorld = createAspects(40, 2, 3, 5)
+-- Leverages Pythagoras' Theorem to match the closest biome to a point in the world.
+-- This enables fearless addition of biome properties like CO2
+local closestBiomeMatch = getClosestBiomeToAspects(pointInTheWorld, biomes)
+-- Returns desert biome
+print(closestBiomeMatch:getName())
+```
